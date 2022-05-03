@@ -86,7 +86,7 @@ void GameOfLife::evolvingStage()
 				_neighbour++;
 			}
 
-			if (_neighbour >= 3)
+			if (_neighbour >= 2)
 			{
 				_tempMap[x][y] = true;	//alive cell
 			}
