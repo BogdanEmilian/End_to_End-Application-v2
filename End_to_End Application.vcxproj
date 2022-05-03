@@ -33,7 +33,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
-    <ClInclude Include="GameOfLife.h" />
+    <ClInclude Include="GameOfLife.hpp" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

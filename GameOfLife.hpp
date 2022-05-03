@@ -18,6 +18,7 @@ public:
 	void setBlock(int, int);
 	void setGliderGun(int, int);
 	void printMap();
+	bool getValue(int, int);
 
 private:
 	bool** _map;
@@ -188,4 +189,10 @@ void GameOfLife::printMap()
 
 	cout << "\n";
 }
+
+bool GameOfLife::getValue(int x, int y)
+{
+	return _map[x][y];
+}
+
 #endif

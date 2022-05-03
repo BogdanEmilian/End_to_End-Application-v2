@@ -1,2 +1,2 @@
 #include "pch.h"
-#include "GameOfLife.h"
+#include "GameOfLife.hpp"

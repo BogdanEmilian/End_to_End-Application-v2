@@ -1,14 +1,30 @@
 #include <iostream>
-#include "GameOfLife.h"
+#include "GameOfLife.hpp"
 #include "pch.h"
 
 using namespace std;
 
+TEST(Init, MapInit) {
+
+	int n = 5;
+
+	GameOfLife game(n);
+
+	game.setValue(1, 1, true);
+	game.setValue(1, 2, true);
+	game.setValue(2, 1, true);
+
+	game.evolvingStage();
+
+	ASSERT_TRUE(game.getValue(2, 2), true);
+}
+
 int main()
 {
+	/*
 	int n=5;
 
-	GameOfLife game(n);			//problem with undeclared identifier
+	GameOfLife game(n);
 
 	game.setValue(1, 1, true);
 	game.setValue(1, 2, true);
@@ -22,6 +38,6 @@ int main()
 	cout << "Final map:\n";
 	
 	game.printMap();
-
-	return 0;
+	*/
+	return	RUN_ALL_TESTS();
 }
