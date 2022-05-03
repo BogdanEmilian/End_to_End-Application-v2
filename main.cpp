@@ -1,16 +1,27 @@
 #include <iostream>
-#include "GameOfLife.hpp"
+#include "GameOfLife.h"
+#include "pch.h"
+
+using namespace std;
 
 int main()
 {
-	int _n;
+	int n=5;
 
-	std::cout << "Please enter th size of the map: \n";
-	std::cin >> _n;
+	GameOfLife game(n);			//problem with undeclared identifier
 
-	GameOfLife::GameOfLife(_n);
+	game.setValue(1, 1, true);
+	game.setValue(1, 2, true);
+	game.setValue(2, 1, true);
 
+	cout << "Initial map:\n";
 
+	game.printMap();
+	game.evolvingStage();
+
+	cout << "Final map:\n";
+	
+	game.printMap();
 
 	return 0;
 }
