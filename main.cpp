@@ -36,7 +36,7 @@ int main()
 	game.evolvingStage();
 
 	cout << "Final map:\n";
-	
+
 	game.printMap();
 	*/
 	return	RUN_ALL_TESTS();
