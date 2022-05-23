@@ -1,6 +1,7 @@
+#include "pch.h"
 #include <iostream>
 #include "GameOfLife.hpp"
-#include "pch.h"
+
 
 using namespace std;
 
@@ -8,38 +9,23 @@ TEST(Init, MapInit) {
 
 	int n = 5;
 
-	GameOfLife game(n);
+	GameOfLife game(5);
 
 	game.setValue(1, 2, true);
 	game.setValue(2, 1, true);
 
 	game.evolvingStage();
 
-	ASSERT_TRUE(game.getValue(1, 1), true);
-	ASSERT_TRUE(game.getValue(2, 2), true);
-	ASSERT_TRUE(game.getValue(1, 2), false);
-	ASSERT_TRUE(game.getValue(2, 1), false);
+	ASSERT_TRUE(game.getValue(1, 1));
+	ASSERT_TRUE(game.getValue(2, 2));
+	ASSERT_FALSE(game.getValue(1, 2));
+	ASSERT_FALSE(game.getValue(2, 1));
 }
 
 int main()
 {
-	/*
-	int n=5;
-
-	GameOfLife game(n);
-
-	game.setValue(1, 1, true);
-	game.setValue(1, 2, true);
-	game.setValue(2, 1, true);
-
-	cout << "Initial map:\n";
-
-	game.printMap();
-	game.evolvingStage();
-
-	cout << "Final map:\n";
-
-	game.printMap();
-	*/
 	return	RUN_ALL_TESTS();
+	GameOfLife game(5);
+	game.evolvingStage();
+	return 0;
 }
