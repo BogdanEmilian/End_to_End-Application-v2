@@ -11,7 +11,9 @@ class GameOfLife
 {
 public:
 	GameOfLife(int);			//initialization
+	~GameOfLife();
 	void evolvingStage();		//a step in the evolution
+	void setValue(int, int);
 	void setValue(int, int, bool);
 	void setGlider(int, int);
 	bool** getMap();
@@ -21,7 +23,7 @@ public:
 	bool getValue(int, int);
 
 private:
-	bool** _map;
+	bool** _map, ** _tempMap;
 	int _n;
 
 };

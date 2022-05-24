@@ -11,7 +11,7 @@ TEST(Init, MapInit) {
 
 	GameOfLife game(5);
 
-	std::vector<std::vector<bool>> map, testMap;
+	bool** map, ** testMap;
 	
 
 	game.setValue(0, 1, true);
@@ -54,7 +54,4 @@ TEST(Init, MapInit) {
 int main()
 {
 	return	RUN_ALL_TESTS();
-	GameOfLife game(5);
-	game.evolvingStage();
-	return 0;
 }

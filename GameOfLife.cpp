@@ -5,23 +5,30 @@ GameOfLife::GameOfLife(int size)
 {
 	_n = size;
 
-	for (int i = 0; i < _n; ++i) {
-		for (int j = 0; j < _n; j++) {
-			_map[i][j] = new bool[_n];
-		}
+	bool** _map = new bool* [_n];
+
+	for (int i = 0; i < _n; ++i) 
+	{
+		_map[i] = new bool[_n];
 	}
 }
 
 void GameOfLife::evolvingStage()
 {
-	bool _tempMap;
+	_tempMap = new bool* [_n];
 	int _neighbour;
+
+	for (int i = 0; i < _n; ++i)
+	{
+		_tempMap[i] = new bool[_n];
+	}
 
 	//Center of the matrix scanning
 	for (int y = 1; y < _n - 1; y++)
 	{
 		for (int x = 1; x < _n - 1; x++)
 		{
+			/*
 			_neighbour = 0;
 
 			if (_map[x - 1][y - 1] == true)
@@ -56,7 +63,7 @@ void GameOfLife::evolvingStage()
 			{
 				_neighbour++;
 			}
-			/*
+			
 			if (_neighbour >= 3)
 			{
 				_tempMap[x][y] = true;	//alive cell
@@ -66,42 +73,80 @@ void GameOfLife::evolvingStage()
 				_tempMap[x][y] = false;	//dead cell
 			}
 			*/
+
+			setValue(x, y);
+			
 		}
 	}
+
+	memcpy(_map, _tempMap, sizeof(_map));
+
+	for (int i = 0; i < _n; ++i)
+	{
+		delete[] _tempMap[i];
+	}
+	delete[] _tempMap;
 }
 
 bool** GameOfLife::getMap() {
 	return _map;
 }
 
+void GameOfLife::setValue(int x, int y)
+{
+	int _neighbour = 0;
+
+	if (_map[x - 1][y - 1] == true)
+	{
+		_neighbour++;
+	}
+	if (_map[x][y - 1] == true)
+	{
+		_neighbour++;
+	}
+	if (_map[x + 1][y - 1] == true)
+	{
+		_neighbour++;
+	}
+	if (_map[x - 1][y] == true)
+	{
+		_neighbour++;
+	}
+	if (_map[x + 1][y] == true)
+	{
+		_neighbour++;
+	}
+	if (_map[x - 1][y + 1] == true)
+	{
+		_neighbour++;
+	}
+	if (_map[x][y + 1] == true)
+	{
+		_neighbour++;
+	}
+	if (_map[x + 1][y + 1] == true)
+	{
+		_neighbour++;
+	}
+
+	if (_neighbour >= 2 && _neighbour <= 3 && _map[x][y] == true)
+	{
+		_tempMap[x][y] = true;	//alive cell
+	}
+	else if(_neighbour == 3 && _map[x][y] == false)
+	{
+		_tempMap[x][y] = true;	//alive cell
+	}
+	else
+	{
+		_tempMap[x][y] = false;	//dead cell
+	}
+
+	//_map[x][y] = v;
+}
+
 void GameOfLife::setValue(int x, int y, bool v)
 {
-	/* int neighbour = 0;
-
-	if ((_map[i - 1][j - 1] == true) && (i - 1 >= 0) && (j - 1 >= 0))
-		neighbour++;
-
-	if ((_map[i][j - 1] == true) && (j - 1 >= 0))
-		neighbour++;
-
-	if ((_map[i + 1][j - 1] == true) && (i + 1 < _n) && (j - 1 >= 0))
-		neighbour++;
-
-	if ((_map[i - 1][j] == true) && (i - 1 >= 0))
-		neighbour++;
-
-	if ((_map[i + 1][j] == true) && (i + 1 < _n))
-		neighbour++;
-
-	if ((_map[i - 1][j + 1] == true) && (i - 1 >= 0) && (j + 1 < _n))
-		neighbour++;
-
-	if ((_map[i + 1][j + 1] == true) && (i + 1 < _n) && (j + 1 < _n))
-		neighbour++;
-
-	if ((_map[i][j + 1] == true) && (j + 1 < _n))
-		neighbour++;
-		*/
 	_map[x][y] = v;
 }
 
@@ -145,4 +190,13 @@ void GameOfLife::printMap()
 bool GameOfLife::getValue(int x, int y)
 {
 	return _map[x][y];
+}
+
+GameOfLife::~GameOfLife()
+{
+	for (int i = 0; i < _n; ++i)
+	{
+		delete[] _map[i];
+	}
+	delete[] _map;
 }
