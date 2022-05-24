@@ -5,23 +5,24 @@ GameOfLife::GameOfLife(int size)
 {
 	_n = size;
 
-	bool** _map = new bool* [_n];
+	_map = new bool* [_n];
+	_tempMap = new bool* [_n];
 
 	for (int i = 0; i < _n; ++i) 
 	{
 		_map[i] = new bool[_n];
+		_tempMap[i] = new bool[_n];
+		for (int j = 0; j < _n; j++)
+		{
+			_map[i][j] = false;
+			_tempMap[i][j] = false;
+		}
 	}
 }
 
 void GameOfLife::evolvingStage()
 {
-	_tempMap = new bool* [_n];
 	int _neighbour;
-
-	for (int i = 0; i < _n; ++i)
-	{
-		_tempMap[i] = new bool[_n];
-	}
 
 	//Center of the matrix scanning
 	for (int y = 1; y < _n - 1; y++)
@@ -81,11 +82,6 @@ void GameOfLife::evolvingStage()
 
 	memcpy(_map, _tempMap, sizeof(_map));
 
-	for (int i = 0; i < _n; ++i)
-	{
-		delete[] _tempMap[i];
-	}
-	delete[] _tempMap;
 }
 
 bool** GameOfLife::getMap() {
@@ -197,6 +193,8 @@ GameOfLife::~GameOfLife()
 	for (int i = 0; i < _n; ++i)
 	{
 		delete[] _map[i];
+		delete[] _tempMap[i];
 	}
 	delete[] _map;
+	delete[] _tempMap;
 }
