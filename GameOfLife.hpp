@@ -14,14 +14,14 @@ public:
 	void evolvingStage();		//a step in the evolution
 	void setValue(int, int, bool);
 	void setGlider(int, int);
-	bool getMap();
+	bool** getMap();
 	void setBlock(int, int);
 	void setGliderGun(int, int);
 	void printMap();
 	bool getValue(int, int);
 
 private:
-	bool _map[500][500];
+	bool** _map;
 	int _n;
 
 };

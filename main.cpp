@@ -11,15 +11,44 @@ TEST(Init, MapInit) {
 
 	GameOfLife game(5);
 
+	std::vector<std::vector<bool>> map, testMap;
+	
+
+	game.setValue(0, 1, true);
+	game.setValue(1, 0, true);
 	game.setValue(1, 2, true);
-	game.setValue(2, 1, true);
+
+	game.setValue(3, 2, true);
+	game.setValue(3, 4, true);
+	game.setValue(4, 3, true);
+
+	game.setValue(4, 0, true);
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			testMap[i][j] = false;
+		}
+	}
+
+	testMap[0][1] = true;
+	testMap[1][1] = true;
+	testMap[3][3] = true;
+	testMap[4][3] = true;
+
 
 	game.evolvingStage();
 
-	ASSERT_TRUE(game.getValue(1, 1));
-	ASSERT_TRUE(game.getValue(2, 2));
-	ASSERT_FALSE(game.getValue(1, 2));
-	ASSERT_FALSE(game.getValue(2, 1));
+	map = game.getMap();
+
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < n; j++) 
+		{
+			EXPECT_EQ(map[i][j], testMap[i][j]);
+		}
+	}
 }
 
 int main()

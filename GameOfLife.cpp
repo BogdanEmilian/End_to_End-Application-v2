@@ -70,7 +70,7 @@ void GameOfLife::evolvingStage()
 	}
 }
 
-bool GameOfLife::getMap() {
+bool** GameOfLife::getMap() {
 	return _map;
 }
 
